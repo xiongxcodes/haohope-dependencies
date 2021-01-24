@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.xiongxcodes</groupId>
 	<artifactId>haohope-dependencies</artifactId>
-	<version>1.0.0-releases</version>
+	<version>1.0.1-RELEASES</version>
 	<packaging>pom</packaging>
-	<name>Haohope Build</name>
-	<url>https://github.com/xiongxcodes/haohope-common-dependencies</url>
+	<name>haohope-dependencies</name>
+	<url>https://github.com/xiongxcodes/haohope-dependencies</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -19,6 +19,9 @@
 		<poi.version>4.1.2</poi.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<!-- poi end -->
+		<!-- api-boot start -->
+		<magic-api.version>0.6.0</magic-api.version>
+		<!-- api-boot end -->
 		<!-- swagger start -->
 		<swagger2.version>2.9.2</swagger2.version>
 		<swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
@@ -41,15 +44,18 @@
 		<!-- hutool start -->
 		<hutool.version>5.4.7</hutool.version>
 		<!-- hutool end -->
+		<!-- sagacity start -->
+		<sagacity.version>4.17.12</sagacity.version>
+		<!-- sagacity end -->
 		<!-- lombok start -->
 		<lombok.version>1.18.12</lombok.version>
 		<!-- lombok end -->
 		<!-- mybatis start -->
 		<pagehelper.version>5.2.0</pagehelper.version>
 		<!-- mybatis end -->
-		<!-- redis start-->
+		<!-- redis start -->
 		<redisson.version>3.12.3</redisson.version>
-		<!-- redis end-->
+		<!-- redis end -->
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -147,6 +153,21 @@
 				<artifactId>pagehelper</artifactId>
 				<version>${pagehelper.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>2.1.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>3.4.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>1.3.0</version>
+			</dependency>
 			<!-- mybatis end -->
 			<!-- hutool start -->
 			<dependency>
@@ -162,18 +183,47 @@
 				<version>${lombok.version}</version>
 			</dependency>
 			<!-- lombok end -->
-			<!-- redis start-->
+			<!-- redis start -->
 			<dependency>
 				<groupId>org.redisson</groupId>
 				<artifactId>redisson-spring-boot-starter</artifactId>
 				<version>${redisson.version}</version>
 			</dependency>
-			<!-- redis end-->
+			<!-- redis end -->
+			<!-- magic-api start -->
+			<dependency>
+				<groupId>org.ssssssss</groupId>
+				<artifactId>magic-api-spring-boot-starter</artifactId>
+				<version>${magic-api.version}</version>
+			</dependency>
+			<!-- magic-api end -->
+			<!-- sagacity start -->
+			<dependency>
+				<groupId>com.sagframe</groupId>
+				<artifactId>sagacity-sqltoy-starter</artifactId>
+				<version>${sagacity.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sagframe</groupId>
+				<artifactId>sagacity-sqltoy</artifactId>
+				<version>${sagacity.version}</version>
+			</dependency>
+			<!-- sagacity end -->
 			<!-- swagger2 start -->
 			<dependency>
 				<groupId>io.springfox</groupId>
 				<artifactId>springfox-swagger2</artifactId>
 				<version>${swagger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${swagger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>swagger-bootstrap-ui</artifactId>
+				<version>1.9.6</version>
 			</dependency>
 			<!-- swagger2 end -->
 			<!-- org.apache.commons start -->
@@ -204,9 +254,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:https://github.com/xiongxcodes/haohope-common-dependencies.git</connection>
-		<developerConnection>scm:git:https://github.com/xiongxcodes/haohope-common-dependencies.git</developerConnection>
-		<url>https://github.com/xiongxcodes/haohope-common-dependencies</url>
+		<connection>scm:git:https://github.com/xiongxcodes/haohope-dependencies.git</connection>
+		<developerConnection>scm:git:https://github.com/xiongxcodes/haohope-dependencies.git</developerConnection>
+		<url>https://github.com/xiongxcodes/haohope-dependencies</url>
 		<tag>HEAD</tag>
 	</scm>
 	<licenses>
@@ -216,31 +266,12 @@
 		</license>
 	</licenses>
 
-	<profiles>
-		<!--配置快照版本发布到私有仓库 -->
-		<profile>
-			<id>publish-snapshot-private-central</id>
-			<distributionManagement>
-				<snapshotRepository>
-					<id>snapshots</id>
-					<url>http://develop:8081/repository/maven-snapshots/</url>
-				</snapshotRepository>
-			</distributionManagement>
-		</profile>
-		<!--配置快照版本发布到Maven仓库 -->
-		<profile>
-			<id>publish-snapshot-maven-central</id>
-			<distributionManagement>
-				<snapshotRepository>
-					<id>sonatype-snapshots</id>
-					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-				</snapshotRepository>
-			</distributionManagement>
-		</profile>
-	</profiles>
-
 	<!--正式版本发布到Maven Central -->
 	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://develop:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
 		<repository>
 			<id>sonatype-releases</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
@@ -250,8 +281,8 @@
 	<repositories>
 		<!--配置拉取Maven仓库正式版依赖 -->
 		<repository>
-			<id>aliyun-central</id>
-			<url>https://maven.aliyun.com/repository/central</url>
+			<id>repo1-central</id>
+			<url>https://repo1.maven.org/maven2/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -272,65 +303,65 @@
 		</repository>
 	</repositories>
 	<build>
-        <plugins>
-            <!--生成Source jar文件-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--生成Javadoc，关闭doclint,避免注解检查不通过-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <additionalparam>-Xdoclint:none</additionalparam>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--Maven GPG插件用于使用以下配置对组件进行签名-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--Nexus Staging Maven插件是将组件部署到OSSRH并将其发布到Central Repository的推荐方法-->
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>sonatype-releases</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+		<plugins>
+			<!--生成Source jar文件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--生成Javadoc，关闭doclint,避免注解检查不通过 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<additionalparam>-Xdoclint:none</additionalparam>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!--Maven GPG插件用于使用以下配置对组件进行签名 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--Nexus Staging Maven插件是将组件部署到OSSRH并将其发布到Central Repository的推荐方法 -->
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>sonatype-releases</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
