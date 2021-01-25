@@ -87,6 +87,19 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
+			<!-- minbox start -->
+			<dependency>
+				<groupId>org.minbox.framework</groupId>
+				<artifactId>minbox-core</artifactId>
+				<version>1.0.5.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.minbox.framework</groupId>
+				<artifactId>minbox-web</artifactId>
+				<version>1.0.5.RELEASE</version>
+			</dependency>
+			<!-- minbox start -->
+			
 			<!-- alibaba start -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
@@ -226,6 +239,11 @@
 				<version>1.9.6</version>
 			</dependency>
 			<!-- swagger2 end -->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>0.9.1</version>
+			</dependency>
 			<!-- org.apache.commons start -->
 			<dependency>
 				<groupId>org.apache.commons</groupId>
